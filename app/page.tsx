@@ -166,6 +166,18 @@ export default function Home() {
             </div>
           </div>
         )}
+
+      <footer className="mt-12 text-center opacity-70">
+        <a href="https://thesaasdir.com/product/clausescan?ref=badge" rel="dofollow">
+          <img
+            src="https://thesaasdir.com/badge/clausescan.svg"
+            alt="Featured on TheSaaSDir"
+            width={182}
+            height={46}
+            className="inline-block"
+          />
+        </a>
+      </footer>
       </div>
     </div>
   );
