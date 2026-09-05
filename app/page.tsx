@@ -179,6 +179,19 @@ export default function Home() {
         </a>
       </footer>
       </div>
+
+      <footer className="max-w-4xl mx-auto py-6 px-4 mt-12 border-t border-gray-200">
+        <div className="flex justify-center">
+          <a href="https://thesaasdir.com/product/clausescan?ref=badge" rel="dofollow">
+            <img 
+              src="https://thesaasdir.com/badge/clausescan.svg" 
+              alt="Featured on TheSaaSDir" 
+              width={182} 
+              height={46}
+            />
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }
