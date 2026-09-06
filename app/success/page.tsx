@@ -3,6 +3,7 @@
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import posthog from "posthog-js";
 
 function SuccessContent() {
   const searchParams = useSearchParams();
@@ -21,6 +22,15 @@ function SuccessContent() {
           
           if (data.verified) {
             localStorage.setItem("clausescan_paid", "true");
+            
+            if (posthog.__loaded) {
+              posthog.capture("payment_success", {
+                product: "clausescan",
+                price: 19,
+                currency: "USD",
+                session_id: sessionId,
+              });
+            }
           }
         })
         .catch(() => {

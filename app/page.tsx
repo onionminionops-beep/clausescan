@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import posthog from "posthog-js";
 
 interface RiskFlag {
   severity: "red" | "amber";
@@ -43,6 +44,14 @@ export default function Home() {
 
   const handlePayment = async () => {
     try {
+      if (posthog.__loaded) {
+        posthog.capture("payment_cta_clicked", {
+          product: "clausescan",
+          price: 19,
+          currency: "USD",
+        });
+      }
+
       const response = await fetch("/api/checkout", {
         method: "POST",
       });
