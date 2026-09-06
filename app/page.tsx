@@ -44,7 +44,7 @@ export default function Home() {
 
   const handlePayment = async () => {
     try {
-      posthog.capture("checkout_cta_clicked", { product: "ClauseScan" });
+      posthog.capture("payment_cta_clicked", { product: "clausescan" });
       const response = await fetch("/api/checkout", {
         method: "POST",
       });
