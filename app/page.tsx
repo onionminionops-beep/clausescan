@@ -1,4 +1,5 @@
 "use client";
+import posthog from "posthog-js";
 
 import { useState, useEffect } from "react";
 
@@ -43,7 +44,8 @@ export default function Home() {
 
   const handlePayment = async () => {
     try {
-      const response = await fetch("/api/checkout", {
+      const response = await posthog.capture("checkout_cta_clicked", { product: "ClauseScan" });
+      fetch("/api/checkout", {
         method: "POST",
       });
 

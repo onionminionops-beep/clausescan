@@ -1,5 +1,7 @@
 "use client";
 
+import PurchaseTracker from "@/app/components/PurchaseTracker";
+
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -33,17 +35,21 @@ function SuccessContent() {
 
   if (verifying) {
     return (
+      <>
+      <PurchaseTracker product="ClauseScan" />
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Verifying payment...</p>
         </div>
       </div>
+      </>
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <PurchaseTracker product="ClauseScan" />
       <div className="max-w-md mx-auto p-8 bg-white rounded-lg shadow-sm text-center">
         {verified ? (
           <>

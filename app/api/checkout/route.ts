@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { captureServer } from "@/lib/posthog-server";
 import Stripe from "stripe";
 
 const PAYMENT_LINK = "https://buy.stripe.com/6oU28l7v26oo7XY7fgeUU06";
@@ -7,6 +8,7 @@ export async function POST() {
   const stripeKey = process.env.STRIPE_SECRET_KEY;
 
   if (!stripeKey) {
+    await captureServer("anonymous", "checkout_started", { product: "ClauseScan", mode: "payment_link" });
     return NextResponse.json({ url: PAYMENT_LINK });
   }
 
@@ -33,9 +35,11 @@ export async function POST() {
       },
     });
 
-    return NextResponse.json({ url: session.url });
+    await captureServer("anonymous", "checkout_started", { product: "ClauseScan", mode: "checkout_session" });
+      return NextResponse.json({ url: session.url });
   } catch (error) {
     console.error("Stripe checkout error:", error);
+    await captureServer("anonymous", "checkout_started", { product: "ClauseScan", mode: "payment_link" });
     return NextResponse.json({ url: PAYMENT_LINK });
   }
 }
